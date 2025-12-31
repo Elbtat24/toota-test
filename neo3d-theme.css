@@ -1,0 +1,460 @@
+/* neo3d-theme.css
+   3D / Glass / Professional overrides for بطوط التعليمية
+   IMPORTANT: This file is meant to be loaded AFTER the original space-style CSS.
+*/
+
+/* =========
+   Color system (override existing vars so old CSS "just works")
+   ========= */
+:root{
+  /* Base */
+  --space-darker:#050814;
+  --space-dark:#070c1a;
+  --space-blue:#0b1636;
+  --space-purple:#3a2a7a;
+  --space-pink:#6b2a6a;
+
+  /* Accents */
+  --space-cyan:#4de1ff;
+  --space-light-cyan:#b6f4ff;
+  --space-yellow:#f7d35a;
+
+  /* Text */
+  --space-white:#eef2ff;
+  --space-gray:#b8c0e6;
+
+  /* Gradients */
+  --space-gradient: radial-gradient(1200px 700px at 20% 15%, rgba(77,225,255,.14), transparent 60%),
+                    radial-gradient(900px 600px at 80% 20%, rgba(122,92,255,.16), transparent 55%),
+                    radial-gradient(900px 700px at 25% 85%, rgba(247,211,90,.10), transparent 60%),
+                    linear-gradient(145deg, #050814 0%, #070c1a 35%, #090f26 100%);
+
+  --card-gradient: linear-gradient(145deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,.05) 35%, rgba(0,0,0,.18) 100%);
+  --glow-effect: 0 0 26px rgba(77,225,255,.25);
+
+  /* 3D tokens */
+  --neo-stroke: rgba(255,255,255,.14);
+  --neo-stroke-strong: rgba(255,255,255,.22);
+  --neo-surface: rgba(255,255,255,.06);
+  --neo-surface-2: rgba(255,255,255,.09);
+
+  --neo-shadow-xl: 0 26px 70px rgba(0,0,0,.55);
+  --neo-shadow-lg: 0 18px 46px rgba(0,0,0,.45);
+  --neo-shadow-md: 0 12px 32px rgba(0,0,0,.40);
+  --neo-shadow-sm: 0 10px 22px rgba(0,0,0,.32);
+
+  --neo-inner: inset 0 1px 0 rgba(255,255,255,.12),
+               inset 0 -1px 0 rgba(0,0,0,.25);
+
+  --neo-radius-xl: 26px;
+  --neo-radius-lg: 18px;
+  --neo-radius-md: 14px;
+  --neo-radius-sm: 12px;
+
+  --neo-trans: 220ms cubic-bezier(.2,.9,.2,1);
+}
+
+/* =========
+   Global polish
+   ========= */
+html{scroll-behavior:smooth;}
+body.space-theme{
+  background: var(--space-gradient) !important;
+  color: var(--space-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Soft grain for depth (very subtle) */
+body.space-theme:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+  opacity:.08;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* Reduce harsh star contrast */
+.stars{opacity:.18 !important; filter: blur(.2px);}
+.stars2{opacity:.12 !important; filter: blur(.4px);}
+.stars3{opacity:.08 !important; filter: blur(.6px);}
+
+.planet{filter: blur(2px) saturate(1.1) !important; opacity:.55;}
+.planet-1,.planet-2,.planet-3{box-shadow: 0 0 80px rgba(77,225,255,.06) !important;}
+
+/* Layout breathing */
+.space-main{
+  padding-top: 26px !important;
+  padding-bottom: 60px !important;
+}
+
+/* =========
+   Navbar (3D glass)
+   ========= */
+.space-navbar{
+  background: rgba(6, 9, 22, .62) !important;
+  border-bottom: 1px solid rgba(255,255,255,.10) !important;
+  box-shadow: 0 12px 30px rgba(0,0,0,.35) !important;
+  backdrop-filter: blur(14px) saturate(140%);
+}
+.nav-container{
+  gap: 14px;
+}
+.logo-icon{
+  filter: drop-shadow(0 10px 16px rgba(0,0,0,.35));
+}
+.logo-text h2{
+  letter-spacing: .2px;
+}
+.mobile-menu-btn{
+  border-radius: 999px !important;
+  background: rgba(255,255,255,.06) !important;
+  border: 1px solid var(--neo-stroke) !important;
+  box-shadow: var(--neo-shadow-sm), var(--neo-inner) !important;
+  transition: transform var(--neo-trans), box-shadow var(--neo-trans), background var(--neo-trans);
+}
+.mobile-menu-btn:hover{ transform: translateY(-1px); }
+
+.nav-controls{
+  background: rgba(255,255,255,.02);
+  border-radius: 16px;
+  padding: 6px;
+  border: 1px solid rgba(255,255,255,.08);
+}
+
+.nav-btn{
+  border-radius: 999px !important;
+  border: 1px solid rgba(255,255,255,.12) !important;
+  background: rgba(255,255,255,.05) !important;
+  box-shadow: var(--neo-shadow-sm), var(--neo-inner) !important;
+  transition: transform var(--neo-trans), box-shadow var(--neo-trans), border-color var(--neo-trans), background var(--neo-trans);
+}
+.nav-btn:hover{
+  transform: translateY(-2px);
+  border-color: rgba(77,225,255,.35) !important;
+  background: rgba(255,255,255,.07) !important;
+  box-shadow: var(--neo-shadow-md), 0 0 0 6px rgba(77,225,255,.06) !important;
+}
+.nav-btn.active{
+  background: linear-gradient(135deg, rgba(77,225,255,.22), rgba(122,92,255,.18)) !important;
+  border-color: rgba(182,244,255,.35) !important;
+  box-shadow: var(--neo-shadow-md), 0 0 0 6px rgba(77,225,255,.08) !important;
+}
+
+/* =========
+   Hero / cards (3D surfaces)
+   ========= */
+.hero-space{
+  border-radius: var(--neo-radius-xl) !important;
+  background: linear-gradient(145deg, rgba(255,255,255,.09), rgba(255,255,255,.04)) !important;
+  border: 1px solid rgba(255,255,255,.14) !important;
+  box-shadow: var(--neo-shadow-xl), var(--neo-inner) !important;
+  overflow: hidden;
+  position: relative;
+}
+.hero-space:after{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  pointer-events:none;
+  background:
+    radial-gradient(600px 200px at 20% 20%, rgba(77,225,255,.12), transparent 60%),
+    radial-gradient(600px 220px at 85% 30%, rgba(122,92,255,.10), transparent 60%);
+  opacity: .9;
+}
+.hero-content, .hero-image{ position: relative; z-index: 1; }
+
+.hero-description{
+  color: rgba(238,242,255,.82) !important;
+}
+
+.stat-card, .feature-card, .subject-card, .settings-card, .exam-card, .leaderboard-card, .modal-content{
+  background: var(--card-gradient) !important;
+  border: 1px solid var(--neo-stroke) !important;
+  border-radius: var(--neo-radius-lg) !important;
+  box-shadow: var(--neo-shadow-lg), var(--neo-inner) !important;
+  backdrop-filter: blur(14px) saturate(140%);
+}
+
+.stat-card:hover,
+.feature-card:hover,
+.subject-card:hover{
+  transform: translateY(-4px) !important;
+  border-color: rgba(77,225,255,.28) !important;
+  box-shadow: var(--neo-shadow-xl), 0 0 0 6px rgba(77,225,255,.05), var(--neo-inner) !important;
+}
+
+.section-title{
+  letter-spacing: .2px;
+}
+
+/* =========
+   Buttons (tactile 3D)
+   ========= */
+.action-btn,
+.subject-action-btn,
+.settings-action,
+.settings-save-btn,
+.start-btn,
+.control-btn,
+.difficulty-btn{
+  border-radius: 999px !important;
+  border: 1px solid rgba(255,255,255,.12) !important;
+  box-shadow: var(--neo-shadow-sm), var(--neo-inner) !important;
+  transition: transform var(--neo-trans), box-shadow var(--neo-trans), filter var(--neo-trans), background var(--neo-trans), border-color var(--neo-trans);
+}
+
+.action-btn.primary-btn,
+.settings-save-btn{
+  background: linear-gradient(135deg, rgba(77,225,255,.95), rgba(122,92,255,.85)) !important;
+  color: #061022 !important;
+  border-color: rgba(255,255,255,.18) !important;
+}
+.action-btn.secondary-btn,
+.subject-action-btn.lectures-btn{
+  background: rgba(255,255,255,.06) !important;
+  color: var(--space-white) !important;
+}
+.action-btn:hover,
+.subject-action-btn:hover,
+.settings-action:hover,
+.settings-save-btn:hover,
+.start-btn:hover,
+.control-btn:hover,
+.difficulty-btn:hover{
+  transform: translateY(-2px);
+  box-shadow: var(--neo-shadow-md), 0 0 0 6px rgba(77,225,255,.06), var(--neo-inner) !important;
+}
+
+.action-btn:active,
+.subject-action-btn:active,
+.settings-action:active,
+.settings-save-btn:active,
+.start-btn:active{
+  transform: translateY(0px);
+  box-shadow: var(--neo-shadow-sm), var(--neo-inner) !important;
+  filter: brightness(.98);
+}
+
+/* =========
+   Inputs / Forms (inset 3D)
+   ========= */
+input, select, textarea{
+  border-radius: var(--neo-radius-md) !important;
+}
+.auth-form input,
+.admin-field input,
+.option-input,
+.question-text,
+.input-group input{
+  background: rgba(5, 8, 20, .50) !important;
+  border: 1px solid rgba(255,255,255,.14) !important;
+  box-shadow: inset 0 10px 22px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.10) !important;
+}
+.auth-form input:focus,
+.admin-field input:focus,
+.option-input:focus,
+.question-text:focus,
+.input-group input:focus{
+  border-color: rgba(77,225,255,.45) !important;
+  box-shadow:
+    inset 0 10px 22px rgba(0,0,0,.35),
+    0 0 0 6px rgba(77,225,255,.08) !important;
+}
+
+/* =========
+   Modals (premium)
+   ========= */
+.modal{
+  backdrop-filter: blur(12px) saturate(120%);
+  background: rgba(0,0,0,.55) !important;
+}
+.modal-content{
+  box-shadow: var(--neo-shadow-xl), var(--neo-inner) !important;
+}
+.modal-header h2{
+  color: var(--space-light-cyan) !important;
+}
+.close-modal{
+  border-radius: 999px !important;
+  border: 1px solid rgba(255,255,255,.12) !important;
+  background: rgba(255,255,255,.06) !important;
+  box-shadow: var(--neo-shadow-sm), var(--neo-inner) !important;
+}
+.close-modal:hover{ transform: translateY(-1px); }
+
+/* =========
+   Tables (admin/users/attempts)
+   ========= */
+table{
+  border-collapse: separate !important;
+  border-spacing: 0 10px !important;
+}
+.admin-users-table tr,
+.admin-attempts-table tr{
+  background: rgba(255,255,255,.04) !important;
+  box-shadow: var(--neo-shadow-sm), var(--neo-inner) !important;
+}
+.admin-users-table td, .admin-users-table th,
+.admin-attempts-table td, .admin-attempts-table th{
+  border: none !important;
+}
+.admin-users-table tr:hover,
+.admin-attempts-table tr:hover{
+  background: rgba(255,255,255,.06) !important;
+}
+
+/* =========
+   Accessibility / motion
+   ========= */
+:focus-visible{
+  outline: 3px solid rgba(77,225,255,.35);
+  outline-offset: 3px;
+  border-radius: 14px;
+}
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  html{ scroll-behavior: auto; }
+}
+
+
+/* =========
+   V2: Sharper + IBM Plex Sans Arabic + Modern subject cards
+   ========= */
+
+/* Typography */
+:root{
+  --neo-font: 'IBM Plex Sans Arabic','Cairo',system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --neo-radius-xl: 20px;
+  --neo-radius-lg: 16px;
+  --neo-radius-md: 12px;
+  --neo-radius-sm: 10px;
+  --neo-stroke: rgba(255,255,255,.18);
+  --neo-stroke-strong: rgba(255,255,255,.28);
+}
+body, button, input, select, textarea{
+  font-family: var(--neo-font) !important;
+}
+h1,h2,h3{
+  letter-spacing: .15px;
+}
+
+/* Make the look a bit sharper (less haze) */
+body.space-theme:before{ opacity: .055 !important; }
+.stars,.stars2,.stars3{ filter: none !important; }
+.planet{ filter: blur(1.2px) saturate(1.05) !important; opacity: .5 !important; }
+
+/* Modern material cards */
+.subjects-section{
+  margin-top: 30px !important;
+}
+.subjects-grid{
+  gap: 18px !important;
+}
+.subject-card{
+  position: relative !important;
+  overflow: hidden !important;
+  padding: 18px 18px 16px !important;
+  transform-style: preserve-3d;
+}
+.subject-card::after{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  pointer-events:none;
+  background:
+    radial-gradient(820px 240px at 22% 12%, rgba(77,225,255,.14), transparent 58%),
+    radial-gradient(760px 240px at 84% 18%, rgba(122,92,255,.12), transparent 60%),
+    radial-gradient(520px 220px at 40% 112%, rgba(247,211,90,.08), transparent 60%);
+  opacity:.95;
+}
+.subject-card > *{ position:relative; z-index:1; }
+
+.subject-header{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap: 12px !important;
+}
+.subject-header .subject-icon{
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 14px !important;
+  background: linear-gradient(135deg, rgba(77,225,255,.26), rgba(122,92,255,.16)) !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+  box-shadow: 0 16px 32px rgba(0,0,0,.40), inset 0 1px 0 rgba(255,255,255,.12) !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+.subject-header .subject-icon i{ font-size: 18px !important; }
+
+.subject-title h3{
+  margin:0 !important;
+  font-size: 1.08rem !important;
+  font-weight: 700 !important;
+  line-height: 1.25 !important;
+}
+.subject-title p{
+  margin: 2px 0 0 !important;
+  font-size: .86rem !important;
+  opacity: .7 !important;
+}
+
+.subject-description p{
+  margin: 10px 0 0 !important;
+  line-height: 1.75 !important;
+  font-size: .95rem !important;
+  color: rgba(238,242,255,.84) !important;
+}
+
+.subject-actions{
+  margin-top: 14px !important;
+  display:flex !important;
+  gap: 10px !important;
+}
+.subject-action-btn{
+  flex: 1 1 auto;
+  border-radius: 14px !important;
+  padding: 10px 12px !important;
+  justify-content:center !important;
+  gap: 8px !important;
+  letter-spacing: .1px;
+}
+.subject-action-btn.exam-btn{
+  background: linear-gradient(135deg, rgba(77,225,255,.20), rgba(122,92,255,.12)) !important;
+}
+
+.subject-stats{
+  margin-top: 12px !important;
+  display:flex !important;
+  flex-wrap:wrap !important;
+  gap: 8px !important;
+}
+.subject-stats span{
+  display:inline-flex !important;
+  align-items:center !important;
+  gap: 6px !important;
+  padding: 7px 10px !important;
+  border-radius: 999px !important;
+  background: rgba(255,255,255,.045) !important;
+  border: 1px solid rgba(255,255,255,.10) !important;
+  color: rgba(238,242,255,.82) !important;
+  font-size: .84rem !important;
+}
+.subject-stats i{ opacity: .92 !important; }
+
+@media (hover:hover) and (pointer:fine){
+  .subject-card:hover{
+    transform: perspective(900px) translateY(-6px) rotateX(2deg) rotateY(-2deg) !important;
+  }
+}
+
+/* Slightly sharper nav buttons */
+.nav-btn, .action-btn, .subject-action-btn{
+  border-radius: 14px !important;
+}
